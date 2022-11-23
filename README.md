@@ -48,3 +48,16 @@ python main_wo_weatmask_posi_50_v2_gating.py --id="ID for this training" --train
   (Download a pre-trained weight file from [here](https://drive.google.com/file/d/1TyPY5pT7hANtXGsH5VAKauxdWkBLLUrI/view?usp=sharing))
  
 4. Evaluating using the CARLA benchmark
+
+* Third Stage: Run Benchmark
+ 1. Go to the CARLA 0.8.X folder
+ 2. Run the CARLA simulator
+ '''
+ (Town01) sh CarlaUE4.sh /Game/Maps/Town01 -windowed -world-port=2000  -benchmark -fps=10 -ResX=800 -ResY=600
+ (Town02) sh CarlaUE4.sh /Game/Maps/Town02 -windowed -world-port=2000  -benchmark -fps=10 -ResX=800 -ResY=600
+ * You can change the parameters according to the your experimental conditions.
+ '''
+ 3. Run an evaluation script in 'driving-benchmark-AAAI' using below command
+ '''
+ python run_representation_action_mine_posi50_gating.py --corl-2017 (or --carla100) --continue-experiment --model-path='Weight path trained by main_wo_weatmask_posi_50_v2_gating.py' --vae-model-dir="Weight path trained by train_CycleVAE_lusr_v2.py"
+ '''
